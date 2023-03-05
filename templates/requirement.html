@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Requirements
+{% endblock %}
+
+{% block main %}
+<div class="main-body">
+    <div class="page-header">
+        <h5> Visa types that you may find relevant </h5>
+        <p></p>
+    </div>
+
+    <div class = "Visa-metadata">
+        <div>
+            <button type="button" class="btn btn-info"> Basic condition </button>
+            <p>Destination: {{Destination}} </p>
+            <p>Purpose: {{Purpose}} </p>
+        </div>
+        <div>
+            <button type="button" class="btn btn-info"> Extra information </button>
+            <p>Citizenship:
+                {% for nation in Nationalities %}
+                {{nation}}
+                {% endfor %}
+            </p>
+            <p> Visas hold:
+                {% for visa in Visas %}
+                {{visa}}
+                {% endfor %}
+            </p>
+            <p> Residence: {{Residence}} </p>
+        </div>
+    </div>
+
+    <!--display all list of eligible visa type-->
+    <div class="visa-type-all">
+        <div>
+            <button type="button" class="btn btn-info"> Applicable visa type(s) </button>
+            <div class="row">
+                {% for visa in Visa_Type %}
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title" name="visa-type" >{{visa["Visa_Type_Name"]}}</h5>
+                      <p class="card-text">{{visa["Description"]}}</p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <p></p>
+        </div>
+    </div>
+
+    <!--list documuent required for each visa type-->
+    <div class="req-doc">
+        <div>
+            <a>
+                <button type="button" class="btn btn-info"> Documents required </button>
+                <form action="/requirement" method="POST">
+                    {% for visa in Visa_Type %}
+                        <button type="submit" class="btn btn-light" name="visa-type" value="{{visa["Visa_Type_ID"]}}" id="{{visa["Visa_Type_ID"]}}"> For {{visa["Visa_Type_Name"]}} </button>
+                        {% if typeID == visa["Visa_Type_ID"] %}
+                        <script>
+                            document.getElementById("{{visa["Visa_Type_ID"]}}").style.borderColor = "black";
+                        </script>
+                        {% endif %}
+                    {% endfor %}
+                </form>
+            </a>
+        </div>
+        <!--only list doc required for the chose visa type-->
+        {% if typeID != None %}
+        <ul class="list-group list-group-numbered">
+            {% for req in require_list %}
+            <li class="list-group-item">
+              {{req["Requirement_Name"]}}
+            </li>
+            {% endfor %}
+        </ul>
+        <!--add all doc required into a visa to-do list-->
+        <form action="/apply" method="POST">
+            <div class="d-grid gap-2 col-6 mx-auto">
+                 <input name="chosen-type" type="number" id="chosen-type" value="{{typeID}}" hidden>
+                 <button type="submit" class="btn btn-primary">
+                    Start preparing the documents!
+                 </button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

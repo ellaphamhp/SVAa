@@ -1,0 +1,27 @@
+body {
+  font-family: Monospace
+}
+
+.main-body {
+  padding: 5% 5% 5% 5%;
+}
+
+.page-header {
+  text-align: center;
+  font-weight: 500;
+  color: #0d0eff;
+}
+
+.intro-text {
+  text-align: center;
+}
+
+.paragraph-header {
+  text-align: center;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.centered-align{
+  margin: auto !important;
+}

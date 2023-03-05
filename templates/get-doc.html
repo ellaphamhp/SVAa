@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your documents
+{% endblock %}
+
+{% block main %}
+<div class="main-body">
+    <div class="mb-3">
+
+        {% if order %}
+        <div class="row">
+            <div class="col"><p><button type="button" class="btn btn-primary bg-gradient text-light">Booking ref</button>  <a>{{order["booking_reference"]}}</a> </p></div>
+            <div class="col"><p><button type="button" class="btn btn-primary bg-gradient text-light">Issuing airline</button>  <a>{{order["owner"]}}</a> </p></div>
+            <div class="col"><p><button type="button" class="btn btn-primary bg-gradient text-light">Total amount </button> <a>{{order["total_amount"]}}</a> </p></div>
+        </div>
+        <div class="row">
+            <div class="col"><p><button type="button" class="btn btn-primary bg-gradient text-light">Passenger</button>  <a>{{order["title"]}} {{order["given_name"]}} {{order["family_name"]}}</a> </p></div>
+            <div class="col"><p><button type="button" class="btn btn-primary bg-gradient text-light">Passenger's D.O.B </button> <a>{{order["born_on"]}}</a></p></div>
+            <div class="col"><p><button type="button" class="btn btn-primary bg-gradient text-light" hidden></button> <a></a></p></div>
+        </div>
+        <div class="row">
+            {% for flight in order["flights"] %}
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header bg-primary bg-gradient text-light">
+                        <h5>Flight booked!</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title"> {{flight["Origin"]}} - {{flight["Destination"]}} </h6>
+                        <p class="card-text"> Operating carriers: {{flight["Depart_carrier"]}}</p>
+                        <p class="card-text">Depart at: {{flight["Depart_at"]}} </p>
+                        <p class="card-text"></p> Arrive at: {{flight["Arrive_at"]}} </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        {% else %}
+        <div>
+            API Error: please try again
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="paragraph-header">
+        Flight itinerary
+        <p></p>
+    </div>
+    <div>
+        <form action="/get-flight-iti" method="post">
+            <button class="btn btn-primary mx-auto" type="submit">Download flight itinerary</button>
+        </form>
+    </div>
+
+    <div class="mb-3">
+        <div class="paragraph-header">
+            Travel insurance details
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body text-center">
+            <p class="card-text"> Go to our partner AXA's insurance quotes!</p>
+            <a role="button" class="btn btn-primary" href="https://www.axa-travel-insurance.com/">Get quote</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

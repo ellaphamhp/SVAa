@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Start application
+{% endblock %}
+
+{% block main %}
+<div class="main-body">
+    <form action="get-doc" method="post">
+        <div class="mb-3">
+            <div class="paragraph-header">
+                Applicant's information
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a>Title </a>
+                    <select class="form-select mx-auto w-auto" name="title" required>
+                        <li><a class="dropdown-item"><option value="Ms">Ms</option></a></li>
+                        <li><a class="dropdown-item"><option value="Miss">Miss</option></a></li>
+                        <li><a class="dropdown-item"><option value="Mrs">Mrs</option></a></li>
+                        <li><a class="dropdown-item"><option value="Mr">Mr</option></a></li>
+                        <li><a class="dropdown-item"><option value="">None</option></a></li>
+                    </select>
+                </div>
+                <div class="col">
+                    <a>Gender </a>
+                    <select class="form-select mx-auto w-auto" name="gender" required>
+                        <li><a class="dropdown-item"><option value="F">Female</option></a></li>
+                        <li><a class="dropdown-item"><option value="M">Male</option></a></li>
+                    </select>
+                </div>
+                <div class="col">
+                    <a>First name </a><input class="form-control"  name="first-name" type="text" required>
+                </div>
+                <div class="col">
+                    <a>Last name </a><input class="form-control"  name="last-name" type="text" required>
+                </div>
+                <div class="col">
+                    <a>Date of Birth </a><input class="form-control"  name="D-O-B" type="date" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a>Trip's start date </a><input class="form-control" name="flight-depart" type="date" required>
+                </div>
+                <div class="col">
+                    <a>Trip's end date </a><input class="form-control" name="flight-return" type="date" required>
+                </div>
+            </div>
+        </div>
+        <p></p>
+        <hr>
+        <P></P>
+        <div class="mb-3">
+            <div class="paragraph-header">
+                Flight reservation
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a>From </a>
+                    <select class="form-select mx-auto w-auto" name="flight-from" required>
+                        {% for a in airports %}
+                        <li><a class="dropdown-item"><option value="{{a["Iata_Code"]}}">{{a["Name"]}}</option></a></li>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <a>To </a>
+                    <select class="form-select mx-auto w-auto" name="flight-to" required>
+                        {% for a in airports %}
+                        <li><a class="dropdown-item"><option value="{{a["Iata_Code"]}}">{{a["Name"]}}</option></a></li>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+
+        <div class="mb-3">
+            <div class="d-grid gap-2 col-4 mx-auto">
+                <p></p>
+                <button class="btn btn-primary" type="submit">Reserve flight tickets</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

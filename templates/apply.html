@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Start application
+{% endblock %}
+
+{% block main %}
+
+<div class="main-body">
+    {% if require_list %}
+    <div class="page-header">
+        <h5> Requirements for your {{chosen_visa}}: </h5>
+        <p></p>
+    </div>
+    <div>
+        {% for req in require_list %}
+            <li class="list-group-item">
+                {{req["Requirement_Name"]}}
+            </li>
+        {% endfor %}
+        <form action="/application", method="POST">
+            <button class="btn btn-primary center_aligned" type="submit">
+                <input name = "application" value ="{{chosen_visa}}" hidden>
+                Create a visa folder for this application
+            </button>
+        </form>
+    </div>
+    {% else %}
+    <div class="page-header">
+        <h4> Select a visa type to start application</h4>
+        <p></p>
+    </div>
+    <div>
+        <div class="row">
+            {% for visa in Visa_Type %}
+            <div class="col-sm-10 centered-align">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" name="visa-type" >{{visa["Visa_Type_Name"]}}</h5>
+                        <p class="card-text">{{visa["Description"]}}</p>
+                    </div>
+                <!--add all doc required into a visa to-do list-->
+                    <form action="/apply" method="POST">
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <input name="chosen-type" type="number" id="chosen-type" value="{{visa["Visa_Type_ID"]}}" hidden>
+                            <button type="submit" class="btn btn-primary col-8 centered-align">
+                                Start preparing the visa application!
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <p></p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

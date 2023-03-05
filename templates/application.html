@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Start application
+{% endblock %}
+
+{% block main %}
+
+<div class="main-body">
+    {% if application %}
+        <div class="page-header">
+            <h5> Your applications folder: </h5>
+            <p></p>
+        </div>
+        <div>
+            {% for app in application %}
+            <form action="/save-progress" method="POST">
+                <div class="card">
+                    <div class="class-header paragraph-header">
+                        {{app["Visa_Type_Name"]}} created on {{app["Created_Date"]}}
+                    </div>
+                    <div class="class-body">
+                        {% for req in app["require_list"] %}
+                            <li class="list-group-item">
+                                {{req["Requirement_Name"]}}
+                                <span>
+                                        <div id="document-status" class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <div class="form-check form-switch" onclick="validate()">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="checked" name="checked" />
+                                                <input class="form-check-status" value="{{req["acquired"][0]["Acquired"]}}" hidden />
+                                                <input class="form-check-var" value="done" name="checkedvar" onload="updateProgress()" hidden>
+                                                <label class="form-check-label" for="flexSwitchCheckChecked" id="docStatus" >Prepared!</label>
+                                            </div>
+                                            <script>
+                                                window.addEventListener('DOMContentLoaded', updateCheckbox);
+                                            </script>
+                                        </div>
+                                </span>
+                                <form action="/prepare-doc" method="POST">
+                                    <span>
+                                        {% if req["Requirement_ID"] in [12] %}
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <button class="btn btn-primary" type="submit" name="chosen-task" id="{{req["Requirement_ID"]}}">
+                                                Reserve flight tickets!
+                                                </button>
+                                            </div>
+                                        {% endif %}
+                                    </span>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </div>
+                    <div class="mx-auto">
+                        <button class="btn btn-primary" type="submit" name="chosen-task"> Save progress! </button>
+                        <input value="{{app["ID"]}}" name = "app_id" hidden>
+                    </div>
+                </div>
+            <p></p>
+            <hr>
+            </form>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <div class="page-header">
+            <h4> You don't have any saved application</h4>
+            <p></p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

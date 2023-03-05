@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<div class="main-body text-center">
+    <div class="page-header">
+        <h4>Create an account</h4>
+        <p></p>
+    </div>
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email" placeholder="User name (Your email address)" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm password" type="password">
+        </div>
+        <div>
+            <button class="btn btn-primary mx-auto w-auto" type="submit">Register</button>
+        </div>
+    </form>
+    <div class="mx-auto w-auto"> Already have an account? <a class="link" href="/login"> Log in</a></div>
+</div>
+{% endblock %}

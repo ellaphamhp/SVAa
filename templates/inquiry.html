@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Inquiry
+{% endblock %}
+
+{% block main %}
+<div class="main-body">
+    <h5>
+        <div class="text-center">
+            <a>Check latest visa requirements: </a>
+        </div>
+    </h5>
+    <form action="/inquiry" method="post">
+        <div class="mb-3">
+              <button type="button" class="btn btn-secondary"> Destination</button>
+              <select class="form-select mx-auto w-auto" name="Destination">
+                {% for c in d_countries %}
+                <li><a class="dropdown-item"><option value="{{c}}">{{c}}</option></a></li>
+                {% endfor %}
+              </select>
+        </div>
+        <div class="mb-3">
+            <a> Countries you are citizen of:</a>
+            <select class="form-select mx-auto w-auto" name="Nationality">
+                {% for c in countries %}
+                <li><a class="dropdown-item"><option value="{{c['country']}}">{{c['name']}}</option></a></li>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <a> The country you are residing in:</a>
+            <select class="form-select mx-auto w-auto" name="Residence">
+                {% for c in countries %}
+                <li><a class="dropdown-item"><option value="{{c['country']}}">{{c['name']}}</option></a></li>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <a> Countries you have obtained visa to visit:</a>
+            <select class="form-select mx-auto w-auto" name="Visa">
+                {% for c in countries %}
+                <li><a class="dropdown-item"><option value="{{c['country']}}">{{c['name']}}</option></a></li>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <button type="button" class="btn btn-secondary"> Purpose of your trip</button>
+            <select class="form-select mx-auto w-auto" name="Purpose">
+                <li><a class="dropdown-item"><option value="Tourism">Tourism</option></a></li>
+                <li><a class="dropdown-item"><option value="Study">Study</option></a></li>
+                <li><a class="dropdown-item"><option value="Business">Business</option></a></li>
+            </select>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Check visa requirements</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+duffel_api
+cs50
+pandas
+flask
+flask-session
+werkzeug.security
+requests
+datetime
+flask_weasyprint
