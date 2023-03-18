@@ -3,7 +3,7 @@ cs50
 pandas
 flask
 flask-session
-werkzeug.security
+werkzeug
 requests
 datetime
 flask_weasyprint

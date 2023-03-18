@@ -6,7 +6,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from helper import book_flights, apology, login_required, required_input, date_validate, email_validate, input_validate
 import pandas as pd
-from flask_weasyprint import HTML, render_pdf
+#from flask_weasyprint import HTML, render_pdf
 
 
 # Configure application
@@ -36,7 +36,7 @@ d_countries = ['Israel', 'Schengen', 'USA']
 Visa_Type = None
 require_list = []
 user_id = None
-countries = pd.read_csv('/workspaces/22214788/project/data/Countries.csv', header = 0).to_dict('records') #Be careful to identify what is the current working directory
+countries = pd.read_csv('./data/Countries.csv', header = 0).to_dict('records') #Be careful to identify what is the current working directory
 
 
 
@@ -428,16 +428,16 @@ def logout():
 
 ################################################
 #Output flight itinerary in pdf
-@app.route("/get-flight-iti", methods=["POST", "GET"])
-@login_required
-def get_flight():
-    """
-    Return pdf format of the flight resevations
-    """
-    #Put flight information into html:
-    global order
-    rendered = render_template('flight-itinerary.html'
-                                , order = order)
+#@app.route("/get-flight-iti", methods=["POST", "GET"])
+#@login_required
+#def get_flight():
+#    """
+#    Return pdf format of the flight resevations
+#    """
+#    #Put flight information into html:
+#    global order
+#    rendered = render_template('flight-itinerary.html'
+#                                , order = order)
 
     # Make pdf out of html:
     #Option 1: pdf = pdfkit.from_string(rendered, False)
@@ -445,9 +445,9 @@ def get_flight():
     #Option 3: weasy print
 
     #Return pdf:
-    response = render_pdf(HTML(string = rendered))
+#    response = render_pdf(HTML(string = rendered))
 
-    return response
+#    return response
 
 
 

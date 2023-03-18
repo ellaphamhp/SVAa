@@ -1,7 +1,7 @@
 import requests
 from duffel_api import Duffel
 import pandas as pd
-from amadeus import ResponseError, Client
+#from amadeus import ResponseError, Client
 import datetime
 from flask import render_template, session, redirect, request
 from functools import wraps
